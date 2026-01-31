@@ -46,13 +46,13 @@ def create_gsi():
                 }
             ]
         )
-        print("✅ Created GSI: status-created_at-index")
+        print("Created GSI: status-created_at-index")
     except Exception as e:
         if 'already exists' in str(e).lower():
-            print("⚠️  GSI status-created_at-index already exists")
+            print("GSI status-created_at-index already exists")
         else:
-            print(f"❌ Error creating status-created_at-index: {e}")
-    
+            print(f"Error creating status-created_at-index: {e}")
+
     # GSI 2: Query by erp_module and severity (for filtering)
     try:
         table.update(
@@ -74,14 +74,14 @@ def create_gsi():
                 }
             ]
         )
-        print("✅ Created GSI: module-severity-index")
+        print("Created GSI: module-severity-index")
     except Exception as e:
         if 'already exists' in str(e).lower():
-            print("⚠️  GSI module-severity-index already exists")
+            print("GSI module-severity-index already exists")
         else:
-            print(f"❌ Error creating module-severity-index: {e}")
-    
-    print("\n✅ GSI creation complete!")
+            print(f"Error creating module-severity-index: {e}")
+
+    print("\nGSI creation complete!")
     print("Note: GSI creation may take a few minutes. Check AWS Console for status.")
 
 if __name__ == "__main__":
