@@ -44,11 +44,11 @@ export const incidentService = USE_MOCK ? mockIncidentService : realIncidentServ
 
 // Log which mode we're using
 if (USE_MOCK) {
-  console.log('🔧 Using MOCK API service (frontend-only mode)')
+  console.log('Using MOCK API service (frontend-only mode)')
   console.log('   Run with backend: npm run dev')
   console.log('   Run mock mode: npm run dev:mock')
 } else {
-  console.log('🌐 Using REAL API service')
+  console.log('Using REAL API service')
   console.log('   Make sure backend is running on http://localhost:8000')
 }
 
