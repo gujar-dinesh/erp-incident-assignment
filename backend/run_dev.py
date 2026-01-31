@@ -7,7 +7,7 @@ import os
 
 # Redirect to run_mock.py
 if __name__ == "__main__":
-    print("⚠️  DEPRECATED: run_dev.py is deprecated.")
+    print("DEPRECATED: run_dev.py is deprecated.")
     print("   Please use: python run_mock.py")
     print("   Redirecting to run_mock.py...\n")
     

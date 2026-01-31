@@ -28,23 +28,23 @@ use_mock_storage = (
 
 if use_mock_storage:
     repository = MockIncidentRepository()
-    print("🔧 Using MOCK storage (in-memory)")
+    print("Using MOCK storage (in-memory)")
 else:
     repository = IncidentRepository()
-    print("🌐 Using REAL DynamoDB storage")
+    print("Using REAL DynamoDB storage")
 
 # Initialize enrichment service (RAG or rule-based)
 if settings.use_rag:
     try:
         vector_repo = InMemoryVectorRepository(repository)
         enrichment_service = RAGEnrichmentService(vector_repo)
-        print("🤖 Using RAG-enhanced enrichment service")
+        print("Using RAG-enhanced enrichment service")
     except Exception as e:
-        print(f"⚠️ Failed to initialize RAG service: {e}. Falling back to rule-based.")
+        print(f"Failed to initialize RAG service: {e}. Falling back to rule-based.")
         enrichment_service = EnrichmentService()
 else:
     enrichment_service = EnrichmentService()
-    print("📋 Using rule-based enrichment service")
+    print("Using rule-based enrichment service")
 
 
 @router.post("", response_model=IncidentResponse, status_code=status.HTTP_201_CREATED)
@@ -204,9 +204,6 @@ async def list_incidents(
         if status_str is None and not explicitly_all_statuses and not severity_str and not module_str:
             status_str = 'open'  # Default to open incidents for efficiency when no filters
         
-        # Debug logging (can be removed in production)
-        print(f"🔍 DEBUG: status={status}, status_str={status_str}, explicitly_all={explicitly_all_statuses}, severity={severity_str}, module={module_str}")
-        
         incidents, next_key = repository.list_all(
             limit=limit,
             last_key=last_key,
@@ -214,8 +211,6 @@ async def list_incidents(
             severity=severity_str,
             erp_module=module_str
         )
-        
-        print(f"🔍 DEBUG: Retrieved {len(incidents)} incidents")
         
         # Encode next key for pagination token
         next_token_str = None
